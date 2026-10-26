@@ -44,3 +44,13 @@ Build-Prüfung, Secret-Scan, Pfadprüfung, Consent- und Rechtsprüfung, menschli
 ## Messung
 
 Jeder Lauf zählt: AI-Aufrufe, Eingabe-/Ausgabetokens, geladene Dateien, Tool-Aufrufe, Komplettregenerationen, fehlgeschlagene Generierungen, wiederverwendete Komponenten, bestandene Prüfungen. Die Suite schreibt diese Werte in `workflow-state.json` → `metrics`. Es werden keine prozentualen Einsparungen behauptet, die nicht gemessen wurden.
+
+## Validierung mit drei Beispielwebsites
+
+Die Szenarien liegen in `scripts/ultimate/scenarios/{handwerk,architektur,beratung}.json` (Schreinerei, Architekturbüro, Beratungsunternehmen), jeweils mit Briefing, Tarif und drei Chat-Änderungen. Ablauf je Szenario: Projekt anlegen → Briefing → Pipeline bis Freigabe (`pnpm ultimate:drive` oder `pnpm ultimate:scenario`) → Chat-Änderungen (`pnpm ultimate:chat <projectId> "<Anweisung>" …`) → Messwerte (`pnpm ultimate:measure`, `scripts/ultimate/report-data.ts`). Ergebnisse und Befunde stehen in `docs/ultimate-efficiency-report.md`. Noch offen: ein Vergleichslauf ohne Sparmodus (volle Dateiladung, Komplettregeneration je Änderung), ohne den keine Ersparnis beziffert wird.
+
+## Geprüfte Zusatzwerkzeuge: Heimdall, Caveman
+
+- **Heimdall MCP** (projektübergreifendes Gedächtnis): geprüft, nicht eingebunden. Die Smart Context Engine (`.cogswell/`, acht Dateien) deckt das Projektgedächtnis ab; ein zweiter Speicher wäre redundant und müsste synchron gehalten werden. Einbindung nur, wenn eine Messung an den drei Szenarien weniger geladene Tokens bei gleicher Ergebnisqualität zeigt.
+- **Caveman** (knappe Antwortform): geprüft, nicht eingebunden. Die Status-Texte (`status-copy.md`) sind bereits knapp; Kundentexte dürfen nicht verkürzt werden. Einbindung nur für interne Logs, wenn eine Messung weniger Ausgabetokens ohne Informationsverlust zeigt.
+- Beide bleiben in der Registry (`reference/skills.md`) als „geprüft, nicht aktiv“ geführt; die Messung ist ein offener Auftrag, kein Versprechen.

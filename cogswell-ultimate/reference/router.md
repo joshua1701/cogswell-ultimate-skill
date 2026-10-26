@@ -1,6 +1,6 @@
 # Skill Router
 
-Ordne jede Anfrage genau einer Absicht zu. Lade nur die genannten Module (`modules/`) und Kontextdateien (`.cogswell/`). Bei Unsicherheit die kleinere Absicht wählen und nachfragen, nie „zur Sicherheit“ alles laden.
+Ordne jede Anfrage genau einer Absicht zu. Lade nur die genannten Module (`modules/`) und Kontextdateien (`.cogswell/`). Bei Unsicherheit die kleinere Absicht wählen und nachfragen, nie „zur Sicherheit“ alles laden. Der Router der Suite (`src/server/ultimate/router.ts`) fällt ohne Treffer auf `section_restyle` zurück; in dem Fall stellt Claude vor der Änderung eine Rückfrage mit zwei konkreten Deutungen.
 
 | Absicht | Erkennungsmerkmale | Deterministisch? | Module | Kontext aus `.cogswell/` |
 | --- | --- | --- | --- | --- |

@@ -33,7 +33,7 @@ Einfaches Deutsch, du-Form, ein Satz, keine Fachbegriffe. Technische Details in 
 | `refusal` | Claude hat diese Anfrage abgelehnt. Bitte formuliere sie anders oder frag deinen Projektmanager. |
 | `max_tokens` | Die Antwort war zu lang. Claude teilt die Aufgabe in kleinere Schritte. |
 | `ECONNREFUSED`, Docker, Container | Die Bau-Umgebung ist nicht erreichbar. Ein Administrator muss sie starten. |
-| Playwright/axe/Lighthouse-Fehler | Die automatische Prüfung konnte nicht laufen. Das Ergebnis gilt als offen, nicht als bestanden. |
+| Playwright/axe-Fehler | Die automatische Prüfung konnte nicht laufen. Das Ergebnis gilt als offen, nicht als bestanden. |
 | alles andere | Etwas ist schiefgegangen. Claude kann eine Reparatur versuchen; die Details stehen im Protokoll. |
 
 ## Cogswell Guide, Satzmuster

@@ -19,7 +19,7 @@
 ## Qualitätsanforderungen
 - Build grün ist Pflicht; nichts wird ohne grünen Build vorgeschaut oder veröffentlicht
 - Fehlgeschlagene Prüfungen bleiben rot; keine Umdeutung
-- Performance als Labordaten (LCP, CLS) mit Kennzeichnung
+- Performance als Labordaten (LCP, CLS) aus dem Playwright-Lauf, als Labor gekennzeichnet; Lighthouse ist nicht eingebunden
 
 ## Fehlerbehandlung
 - Build rot: Fehlerzeilen lesen, kleinste Reparatur, erneut bauen; nach 2 Runden Mitarbeiter mit verständlicher Erklärung (`status-copy.md`) und Rollback-Angebot

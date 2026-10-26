@@ -1,7 +1,7 @@
 ---
 name: cogswell-ultimate
 description: Orchestriert die Website-Produktion von Cogswell Studio vom Kundenbriefing bis zur Freigabe. Standard ist der Pro Efficiency Mode: nur relevante Module und Dateien laden, kleine Änderungen deterministisch, Komplettgenerierung nur auf Auftrag. Nutzen bei jeder Aufgabe an einem Website-Projekt (Briefing, Design, Inhalte, Code, Änderung per Chat, Prüfung, Veröffentlichung) im Suite-Workspace oder in Claude Code.
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Cogswell Ultimate
@@ -15,19 +15,21 @@ Ein Team aus Spezialisten in einem Skill: Creative Director, Brand Designer, UX/
 3. **Deterministisch vor AI.** Farben, Schriften, Abstände, Radien, Texte und Komponenten-Props ändert die Token-Engine der Suite ohne Modellaufruf. Nur Entwurf, Interpretation und Reparatur sind AI-Arbeit.
 4. **Gezielt ändern.** Ablauf aus `reference/efficiency.md` § Targeted Editing: Absicht → betroffene Komponenten → minimaler Kontext → minimale Änderung → relevante Tests → Preview → Gedächtnis aktualisieren. Komplettgenerierung nur bei ausdrücklichem Auftrag oder technischer Notwendigkeit, und dann mit Begründung im Log.
 5. **Wiederverwenden.** Geprüfte Bausteine der Premium Design Library (`reference/design-library.md`) an Marke, Inhalt und Zielgruppe anpassen statt neu erfinden. Varianz entsteht durch Komposition, Art Direction und Bildsprache, nicht durch Neubau.
-6. **Qualität ohne AI.** TypeScript, ESLint, Playwright, axe-core, Lighthouse, Link- und Sitemap-Prüfung laufen als Werkzeuge. Claude liest Ergebnisse, erklärt und repariert. Fehlgeschlagene Prüfungen werden nie als bestanden gemeldet.
+6. **Qualität ohne AI.** TypeScript, ESLint, Playwright (Responsive, Formulare, Konsole, Labor-Performance LCP/CLS), axe-core, Link- und Sitemap-Prüfung laufen als Werkzeuge; Lighthouse ist nicht eingebunden und wird nicht behauptet. Claude liest Ergebnisse, erklärt und repariert. Fehlgeschlagene Prüfungen werden nie als bestanden gemeldet.
 7. **Knappe Logs.** Statusmeldungen in der Sprache aus `reference/status-copy.md`; technische Details in die erweiterten Logs, nicht in den Chat.
 8. **Übergabe statt Gedächtnis.** Vor einem Themenwechsel oder langen Lauf: `reference/handoff.md` befolgen, dann darf die Sitzung geleert oder komprimiert werden.
 
 ## Modelle
 
-Standard ist das im Claude-Pro-Plan verfügbare effiziente Modell (prüfen mit `/model`; nicht Opus voraussetzen). Teurere Modelle nur für Creative Direction, Design Review und komplexe Reparaturen, und nur wenn Tarif und Budget es erlauben (`reference/tiers.md`). Die kommerzielle Kundenplattform läuft über den API-Adapter der Suite (`src/server/ultimate/`), nie über ein persönliches Abonnement.
+In Claude Code gilt das Modell, das der Plan gerade bietet (prüfen mit `/model`; kein bestimmtes Modell voraussetzen). Teurere Modelle nur für Creative Direction, Design Review und komplexe Reparaturen, und nur wenn Tarif und Budget es erlauben (`reference/tiers.md`). Die kommerzielle Kundenplattform läuft über den API-Zugang der Suite (`src/server/ai/`, Modellwahl je Paket und Schritt in `src/server/ai/models.ts`, Prompts aus diesen Modulen über `src/server/ultimate/modules.ts`), nie über ein persönliches Abonnement. Den Paketstandard legt der Administrator fest; der Skill setzt ihn nicht voraus.
 
 ## Pipeline
 
 Briefing → Design Research → Creative Direction → Design Prototypes → Design Approval → Sitemap → Content → Code Generation → Preview → QA → Human Approval → Publish
 
-Jeder Schritt hat in der Suite einen gespeicherten Status, Wiederholung nach Fehler, persistente Ausgabe, Tokenzählung und eine Stelle für menschliche Kontrolle. „Website fertigstellen“ führt nur offene oder veraltete Schritte aus.
+Jeder Schritt hat in der Suite einen gespeicherten Status, Wiederholung nach Fehler, persistente Ausgabe, Tokenzählung und eine Stelle für menschliche Kontrolle. Fehler werden nachvollziehbar dokumentiert: Ursache, Versuch, Reparaturschritt und Ergebnis stehen im Schrittprotokoll und in `workflow-state.json`, nie nur im Chat. „Website fertigstellen“ führt nur offene oder veraltete Schritte aus.
+
+Den Ablauf aus Sicht des Mitarbeiters (Employee Mode, elf geführte Schritte, Expert Mode) beschreibt `reference/employee-mode.md`; Medien und Lizenzen `reference/assets.md`; externe Skills, Registry und Tariffreigabe `reference/skills.md`.
 
 ## Module (bei Bedarf laden)
 
@@ -56,6 +58,9 @@ Jedes Modul nennt Eingaben, Ausgaben, Qualitätsanforderungen, Fehlerbehandlung,
 ## Unverhandelbar
 
 - Nichts erfinden: keine Referenzen, Zahlen, Zertifikate, Bewertungen, Rechtstexte als fertig. Unbestätigtes heißt `[zu bestätigen]`.
+- Keine erfundenen Werkzeuge, APIs, Skills oder Prüfergebnisse: Ein Skill gilt erst als genutzt, wenn sein Aufruf und sein Ergebnis im Protokoll stehen (`reference/skills.md`); eine Prüfung gilt erst als gelaufen, wenn ihr Werkzeug ein Ergebnis geliefert hat.
+- Keine Zusicherung von DSGVO- oder sonstiger Rechtskonformität. Die Suite prüft Consent-Banner, Pflichtseiten und Drittanbieter technisch; die rechtliche Bewertung bleibt beim Menschen.
+- Stock-Material nur lizenzkonform: Envato Elements ausschließlich per manuellem Import mit Lizenznachweis, kein automatisierter Zugriff (`reference/assets.md`).
 - Generierter Code ist nicht vertrauenswürdig: nur erlaubte Pfade, keine externen Skripte, Fonts, Tracker, Secrets.
 - Rechtsdokumente sind Entwürfe mit Prüfpflicht. Veröffentlichung nur nach menschlicher Freigabe.
 - Sicherheits- und Qualitätsprüfungen werden nie übersprungen, um Tokens zu sparen.

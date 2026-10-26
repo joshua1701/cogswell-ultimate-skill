@@ -33,4 +33,4 @@
 - `workflow-state.json`
 - Briefing-Formular (direkt aus der Datenbank)
 
-**Token-Ziel:** ≤ 3 000 Tokens (Lückenprüfung) · **Modell:** effizientes Standardmodell (Haiku-Klasse)
+**Token-Ziel:** ≤ 3 000 Tokens (Lückenprüfung) · **Modell:** effizientes Standardmodell des Pakets (kleine, günstige Klasse reicht)

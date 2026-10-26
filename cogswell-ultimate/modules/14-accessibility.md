@@ -1,7 +1,7 @@
 # 14 · Accessibility
 
 **Rolle:** QA Engineer
-**Zweck:** Barrierefreiheit nach WCAG 2.2 AA, so weit automatisch prüfbar, plus die manuellen Punkte benennen.
+**Zweck:** Barrierefreiheit: axe-core prüft automatisch WCAG 2.1 A/AA (so meldet es die Suite); die zusätzlichen Punkte aus WCAG 2.2 (Fokus nicht verdeckt, Zielgröße 24 px, Ziehbewegungen mit Alternative, konsistente Hilfe) werden als manuelle Prüfpunkte benannt, nie als bestanden gemeldet.
 
 ## Eingaben
 - Gebaute Version, betroffene Seiten
